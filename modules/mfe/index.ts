@@ -1,74 +1,56 @@
 
-window.__jails__mfes = []
-
-export const MfeHost = {
-    exportMFE( m ) {
-        window.__jails__mfes.push( m )
-        const { name, module, dependencies, components } = m
-        return {
-            name,
-            module,
-            dependencies,
-            components
-        }
-    }
-}
-
-export const MfeClient = {
-    install( jails, mfes ) {
-        mfes.forEach(fetchAll(jails))
-        return this
-    }
-}
-
-const loadCss = (url) => {
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = url
-    document.head.appendChild(link)
-}
-
-const loadScript = ( url ) => {
-    return new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.onload = resolve
-        document.head.appendChild(script)
-    })
-}
-
-const loadHTML = (html) => {
-    return fetch(html)
-        .then( response => response.text() )
-}
-
-const fetchAll = (jails) => ({ name, js, css, target, html, dependencies }) => {
+export default {
     
-    const element = document.querySelector(target)
-
-    if( css ) {
-        loadCss(css)
-    }
-
-    if( js ) {
+    load( list ) {
         
-        loadScript(js)
+        list.forEach(({ name, target, url }) => {
+            
+            const element = document.querySelector(target)
+            const base = document.createElement('base')
+            const link = document.createElement('link')
+            const script = document.createElement('script')
 
-            .then( _ => {
+            fetch( url )
+                .then( response => response.text() )
+                .then( html => {
+                    
+                    const promises = []
+                    const parser = new DOMParser()
+                    const dom = parser.parseFromString(html, 'text/html')
+                    
+                    base.href= url
+                    dom.head.appendChild( base )
 
-                const mfe = window.__jails__mfes.find( mfe => mfe.name == name )
-                mfe.components?.forEach( component => jails.register(component.name, component.module, component.dependencies))
-                jails.register(mfe.name, mfe.module, { ...mfe.dependencies, ...dependencies })
+                    const css = dom.querySelector(`link[data-mfe]`)
+                    const js = dom.querySelector(`script[data-mfe]`)
 
-                if( html ) {
-                    loadHTML(html)
-                        .then( xhtml => {
-                            element.innerHTML = xhtml
-                            jails.start(element) 
-                        }) 
-                }else {
-                    jails.start(element) 
-                }
-            })
+                    const component = dom.body.querySelector(name)
+                    element.innerHTML = component.outerHTML
+
+                    if( css ) {
+                        link.rel = 'stylesheet'
+                        link.href = css.href
+                        document.head.appendChild(link) 
+                        promises.push(new Promise((resolve, reject) => {
+                            link.onload = resolve 
+                            link.onerror = reject
+                        })) 
+                    }
+
+                    if( js ) {
+                        const scriptURL = js.src
+                        script.src = scriptURL
+                        document.head.appendChild(script)
+                        promises.push(new Promise((resolve, reject) => {
+                            script.onload = resolve 
+                            script.onerror = reject
+                        }))
+                    }
+
+                    Promise.allSettled(promises)
+                        .then( _ => element.dataset.mfeloaded = true )
+                        .catch( console.error )
+                })
+        })
     }
 }
