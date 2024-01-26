@@ -1,9 +1,12 @@
 {
-  "name": "@jails-org/pandora",
-  "version": "1.0.0",
+  "name": "jails.pandora",
+  "version": "1.0.1",
   "description": "A Realm form Web Applications modules and components",
-  "main": "index.js",
-  "repository": "git@github.com:jails-org/Pandora.git",
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jails-org/Pandora.git"
+  },
   "author": "Javiani <eduardo.ottaviani@gmail.com>",
   "license": "MIT",
   "scripts": {
