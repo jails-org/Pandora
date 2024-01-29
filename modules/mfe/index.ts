@@ -8,7 +8,6 @@ export default {
             const element = document.querySelector(target)
             const base = document.createElement('base')
             const link = document.createElement('link')
-            const script = document.createElement('script')
 
             fetch( url )
                 .then( response => response.text() )
@@ -38,16 +37,16 @@ export default {
                     }
 
                     if( js ) {
-                        const scriptURL = js.src
-                        script.src = scriptURL
-                        document.head.appendChild(script)
+                        const script = document.createElement('script')
+                        script.src = js.src
                         promises.push(new Promise((resolve, reject) => {
                             script.onload = resolve 
                             script.onerror = reject
                         }))
+                        document.head.appendChild(script)
                     }
 
-                    Promise.allSettled(promises)
+                    Promise.all(promises)
                         .then( _ => element.dataset.mfeloaded = true )
                         .catch( console.error )
                 })
