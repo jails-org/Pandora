@@ -1,4 +1,4 @@
-const NAME = 'jls-form-validation'
+const NAME = 'form-validation'
 const DVALIDATION = `[data-validation]`
 const DMASK = '[data-mask]'
 

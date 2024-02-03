@@ -1,8 +1,8 @@
-# &lt;jls-form-validation /&gt;
+# &lt;form-validation /&gt;
 
 For validations and masks. It's a `<form />` element child.
 
-[Example on StackBlitz](https://stackblitz.com/edit/jails-jls-form-validation?file=index.ts)
+[Example on StackBlitz](https://stackblitz.com/edit/jails-form-validation?file=index.ts)
 
 ---
 
@@ -18,18 +18,18 @@ form: {
 
 ##### Events
 
-###### `jls-form-validation:submit`
+###### `form-validation:submit`
 Fired when form is **valid**, provides a `formData` instance of input values and raw data with key and value pairs with names and values of form inputs.
 
 ```ts
-on('jls-form-validation:submit', ({ formData, data }) => {})
+on('form-validation:submit', ({ formData, data }) => {})
 ```
 
-##### `jls-form-validation:error` 
+##### `form-validation:error` 
 Fired when form is **invalid**, provides a map with errors fields.
 
 ```ts
-on('jls-form-validation:error', ({ errors }) => {})
+on('form-validation:error', ({ errors }) => {})
 ```
 
 ---
@@ -40,10 +40,10 @@ on('jls-form-validation:error', ({ errors }) => {})
 
 ##### main.ts
 ```ts
-import * as formValidation from '@jails-org/pandora/components/jls-form-validation'
+import * as formValidation from 'jails.pandora/form-validation'
 import rules from './my-custom-rules'
 
-jails.register('jls-form-validation', formValidation, { ...rules })
+jails.register('form-validation', formValidation, { ...rules })
 jails.start()
 ```
 
@@ -54,7 +54,7 @@ jails.start()
 ```html
 <form novalidate>
     
-    <jls-form-validation>
+    <form-validation>
         
         <div class="form-group">
           <label>Username*</label>
@@ -75,7 +75,7 @@ jails.start()
 
         <button type="submit">Send</button>
 
-    </jls-form-validation>
+    </form-validation>
 
 </form>
 ```
