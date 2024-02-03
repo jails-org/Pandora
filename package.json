@@ -2,6 +2,7 @@
   "name": "jails.pandora",
   "version": "1.0.3",
   "description": "A Realm form Web Applications modules and components",
+  "types":"index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/jails-org/Pandora.git"
