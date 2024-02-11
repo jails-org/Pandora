@@ -5,7 +5,7 @@ const DMASK = '[data-mask]'
 export default function formValidation({ main, elm, state, on, emit, dependencies, trigger }) {
 	//
 	const { validations, masks } = dependencies
-	const form = elm.querySelector('input').form
+	const form = elm.querySelectorAll('input,select,textarea')[0]?.form
 	let fields = getFields(elm)
 
 	main((_) => {
