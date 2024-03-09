@@ -7,7 +7,10 @@
     <h4>A Monorepo for Web Applications Modules and Components</h4>
 </div>
 
+<br />
+
 ## Installing
+
 ```
 npm install jails.pandora
 ```
@@ -17,6 +20,8 @@ or
 yarn add jails.pandora
 ```
 
+<br />
+
 ## Usage 
 
 ```ts
@@ -24,5 +29,7 @@ import * as formValidation from 'jails.pandora/form-validation' // To use form-v
 import Router from 'jails.pandora/router' // To use Grapnel's router module
 import { signal, effect } from 'jails.pandora/store' // To use preact store module wrapper 
 ```
+
+<br />
 
 See more details about each module inside their respective folders.
