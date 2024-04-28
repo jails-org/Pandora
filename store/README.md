@@ -4,7 +4,7 @@
 
 The store is actually the same as `@preact/signals-core`.
 
-For mor information about how to use it, please visit: https://preactjs.com/guide/v10/signals/
+For more information about how to use it, please visit: https://preactjs.com/guide/v10/signals/
 
 [Example on stackblitz](https://stackblitz.com/edit/jails-chartjs-7gc5qo?file=index.ts)
 
