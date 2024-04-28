@@ -339,10 +339,10 @@ glob@^10.3.10:
     minipass "^5.0.0 || ^6.0.2 || ^7.0.0"
     path-scurry "^1.10.1"
 
-grapnel@^0.7.6:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/grapnel/-/grapnel-0.7.6.tgz#0bf6e72b4add14e5ca2e9a478bfb1257fc210c3c"
-  integrity sha512-SSJGpPT+QCfL9q/t1Cgvk3Z13rsjeAtlBmLE0yXy4s/qVbqwx34A+NS/Bj5HHHHuHcQT3WeWtr8Az5MUprPvdQ==
+grapnel@0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/grapnel/-/grapnel-0.6.4.tgz#cc5ab40cd83d3a31b830d7d94449ce81ba684576"
+  integrity sha512-xgxJZVF2OYjbltSOkEV7uoYKAxQBzWOPr6sN9uAGC+ype/oHa5jYe+vtOqe9li4B32NXAyHJAyntWllxZ1HksA==
 
 is-fullwidth-code-point@^3.0.0:
   version "3.0.0"

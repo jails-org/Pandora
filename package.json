@@ -1,6 +1,6 @@
 {
   "name": "jails.pandora",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Realm form Web Applications modules and components",
   "types": "index.d.ts",
   "repository": {
@@ -16,7 +16,7 @@
     "@preact/signals-core": "^1.5.1",
     "@types/node": "^20.10.7",
     "glob": "^10.3.10",
-    "grapnel": "^0.7.6",
+    "grapnel": "0.6.4",
     "vite": "^5.0.11"
   }
 }
