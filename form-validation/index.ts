@@ -6,7 +6,7 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 	//
 	const { validations, masks } = dependencies
 	const form = elm.querySelector('input,select,textarea')?.form
-	let fields = getFields(elm)
+	let fields = getFields(form)
 
 	main((_) => {
 
@@ -161,9 +161,8 @@ const getValueOfField = (field, form) => {
 	}
 }
 
-const getFields = (elm) => {
+const getFields = (form) => {
 	const list = new Set()
-	const fields = elm.querySelectorAll(DVALIDATION)
-	Array.from(fields).forEach((field) => list.add(field.name))
+	Array.from(form.elements).forEach((field) => list.add(field.name))
 	return list
 }
