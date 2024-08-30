@@ -39,47 +39,50 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 
 	const validate = (type) => (e) => {
 		//
-		const input = e.target
-		const name = input.name
-		const value = getValueOfField(input, form)
-		const validationList = input.dataset.validation.split(/\s/)
-		const errorsList = []
-		const currentState = state.get()
+		requestAnimationFrame(() => {
+			const input = e.target
+			const name = input.name
+			const value = getValueOfField(input, form)
+			const validationList = input.dataset.validation.split(/\s/)
+			const errorsList = []
+			const currentState = state.get()
 
-		validationList.forEach((validation) => {
-			if (validation in validations) {
-				const { ok, message } = validations[validation](value, input, form)
-				if (!ok) {
-					errorsList.push(message)
-				}
-			}
-		})
-
-		if (errorsList.length) {
-			if (type === 'input') {
-				fields.add(input.name)
-				state.set((s) => {
-					s.form.isValid = false
-					if (currentState.form.errors[name] && errorsList[0] != currentState.form.errors[name]) {
-						s.form.errors[name] = errorsList[0]
+			validationList.forEach((validation) => {
+				if (validation in validations) {
+					const { ok, message } = validations[validation](value, input, form)
+					if (!ok) {
+						errorsList.push(message)
 					}
-				})
-			} else if (type === 'blur' || type === 'change') {
-				fields.add(input.name)
-				state.set((s) => {
-					s.form.errors[name] = errorsList[0]
-					s.form.isValid = false
-				})
-			}
-		} else {
-			fields.delete(input.name)
-			state.set((s) => {
-				delete s.form.errors[name]
-				if (!fields.size) {
-					s.form.isValid = true
 				}
 			})
-		}
+
+			if (errorsList.length) {
+				if (type === 'input') {
+					fields.add(input.name)
+					state.set((s) => {
+						s.form.isValid = false
+						if (currentState.form.errors[name] && errorsList[0] != currentState.form.errors[name]) {
+							s.form.errors[name] = errorsList[0]
+						}
+					})
+				} else if (type === 'blur' || type === 'change') {
+					fields.add(input.name)
+					state.set((s) => {
+						s.form.errors[name] = errorsList[0]
+						s.form.isValid = false
+					})
+				}
+			} else {
+				fields.delete(input.name)
+				state.set((s) => {
+					delete s.form.errors[name]
+					if (!fields.size) {
+						s.form.isValid = true
+					}
+				})
+			}	
+		})
+		
 	}
 
 	const update = (e) => {
@@ -91,17 +94,18 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 	const onsubmit = (e) => {
 		e.preventDefault()
 		trigger('blur', DVALIDATION)
+		requestAnimationFrame(() => {
+			const data = state.get()
+			const errors = data.form.errors
+			const hasErrors = Object.keys(errors).length
 
-		const data = state.get()
-		const errors = data.form.errors
-		const hasErrors = Object.keys(errors).length
-
-		if (!hasErrors) {
-			const data = serialize(e.target)
-			emit(`${NAME}:submit`, { ...data })
-		} else {
-			emit(`${NAME}:error`, { errors })
-		}
+			if (!hasErrors) {
+				const data = serialize(e.target)
+				emit(`${NAME}:submit`, { ...data })
+			} else {
+				emit(`${NAME}:error`, { errors })
+			}
+		})
 	}
 
 	const handleMask = (e) => {
