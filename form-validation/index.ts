@@ -2,15 +2,22 @@ const NAME = 'form-validation'
 const DVALIDATION = `[data-validation]`
 const DMASK = '[data-mask]'
 
-export default function formValidation({ main, elm, state, on, emit, dependencies, trigger }) {
+export default function formValidation({
+	main,
+	elm,
+	state,
+	on,
+	emit,
+	dependencies,
+	trigger,
+}) {
 	//
 	const { validations, masks } = dependencies
 	const form = elm.querySelector('input,select,textarea')?.form
 	let fields = getFields(form)
 
 	main((_) => {
-
-        on('input', 'input, textarea, select', update)
+		on('input', 'input, textarea, select', update)
 		on('input', DMASK, handleMask)
 		on('focus', DVALIDATION, touch)
 		on('input', DVALIDATION, validate('input'))
@@ -20,12 +27,14 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 		form.addEventListener('reset', reset)
 		form.addEventListener('submit', onsubmit)
 
-        initialValues()
-    })
+		initialValues()
+	})
 
 	const initialValues = () => {
-		if( !validations ) { 
-			throw new Error('<form-validation> - No validations provided in dependencies')
+		if (!validations) {
+			throw new Error(
+				'<form-validation> - No validations provided in dependencies'
+			)
 		}
 		const fields = getInitialValues()
 		state.set((s) => (s.form.fields = fields))
@@ -49,7 +58,11 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 
 			validationList.forEach((validation) => {
 				if (validation in validations) {
-					const { ok, message } = validations[validation](value, input, form)
+					const { ok, message } = validations[validation](
+						value,
+						input,
+						form
+					)
 					if (!ok) {
 						errorsList.push(message)
 					}
@@ -61,7 +74,10 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 					fields.add(input.name)
 					state.set((s) => {
 						s.form.isValid = false
-						if (currentState.form.errors[name] && errorsList[0] != currentState.form.errors[name]) {
+						if (
+							currentState.form.errors[name] &&
+							errorsList[0] != currentState.form.errors[name]
+						) {
 							s.form.errors[name] = errorsList[0]
 						}
 					})
@@ -80,9 +96,8 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 						s.form.isValid = true
 					}
 				})
-			}	
+			}
 		})
-		
 	}
 
 	const update = (e) => {
@@ -94,6 +109,7 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 	const onsubmit = (e) => {
 		e.preventDefault()
 		trigger('blur', DVALIDATION)
+
 		requestAnimationFrame(() => {
 			const data = state.get()
 			const errors = data.form.errors
@@ -128,12 +144,12 @@ export default function formValidation({ main, elm, state, on, emit, dependencie
 	}
 
 	const reset = () => {
-		fields = getFields(elm)
+		fields = getFields(form)
 		state.set({
 			form: {
 				...model.form,
-				fields: getInitialValues()
-			}
+				fields: getInitialValues(),
+			},
 		})
 	}
 }
@@ -143,8 +159,8 @@ export const model = {
 		errors: {},
 		fields: {},
 		touched: {},
-		isValid: false
-	}
+		isValid: false,
+	},
 }
 
 const serialize = (form) => {
@@ -167,6 +183,8 @@ const getValueOfField = (field, form) => {
 
 const getFields = (form) => {
 	const list = new Set()
-	Array.from(form.elements).forEach((field) => list.add(field.name))
+	Array.from(form.elements)
+		.filter((field) => field.name)
+		.forEach((field) => list.add(field.name))
 	return list
 }
