@@ -129,6 +129,11 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
+"@javiani/onijs@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@javiani/onijs/-/onijs-0.0.17.tgz#3603b54e9a562f8ef5a528cf767e4385978874b9"
+  integrity sha512-6fPQmJ5OTanZAkX341XGb+ROuPQg8+cYGKXVOiA8NqGdcttXHcBhgXRhIXz3jfy0/aSsEVL6kDJS8i9hO1KLNw==
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
