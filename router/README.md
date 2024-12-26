@@ -6,9 +6,7 @@ Grapnel, the smallest Javascript router with named parameters.
 
 ## Usage
 
-### Component
 ```js
-import jails from 'jails'
 import Router from 'jails.pandora/router'
 
 const router = new Router()
