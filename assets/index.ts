@@ -19,7 +19,7 @@ export const importJS = ({ url, async = true }) => {
         script.onerror = reject
         document.head.appendChild(script)
     })
-})
+}
 
 export const importHtml = ({ url, ...config }) => {
     return fetch( url, config )
