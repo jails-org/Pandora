@@ -8,8 +8,8 @@ Assets is an abstraction to import Css, Javascript and Html dynamically on runti
 import { importJs, importCss, importHtml } from 'jails.pandora/assets'
 
 importCss({ url :'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' })
-	.then( (event) => console.log(event, 'swiper css loaded') )
-	.catch( (event) => console.error('error on loading swiper css') )
+  .then( (event) => console.log(event, 'swiper css loaded') )
+  .catch( (event) => console.error('error on loading swiper css') )
 
 importJs({ url :'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js' })
   .then( (event) => console.log(event, 'swiper js loaded') )
