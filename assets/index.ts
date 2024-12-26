@@ -1,4 +1,3 @@
-
 export const importCss = ({ url }) => {
     return new Promise((resolve, reject) => {
         const link = document.createElement('link')
@@ -10,7 +9,7 @@ export const importCss = ({ url }) => {
     })
 }
 
-export const importJS = ({ url, async = true }) => {
+export const importJs = ({ url, async = true }) => {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script')
         script.src = url
@@ -23,8 +22,5 @@ export const importJS = ({ url, async = true }) => {
 
 export const importHtml = ({ url, ...config }) => {
     return fetch( url, config )
-        .then( response => ({
-            response,
-            html: response.text()
-        }))
+        .then( response => response.text().then( html => ({ response, html  })) )
 }
