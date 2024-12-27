@@ -1,6 +1,6 @@
 {
   "name": "jails.pandora",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A Realm form Web Applications modules and components",
   "types": "index.d.ts",
   "repository": {
