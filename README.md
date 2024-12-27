@@ -3,7 +3,6 @@
     <img src="https://github.com/user-attachments/assets/10960097-a681-4229-b122-c0dc5a2bbdfe" height="200" />
 </div>
 
-
 <div align="center">
     <h1 style="font-size:100px">Pandora</h1>
     <h4>The Jails Standard Library</h4>
