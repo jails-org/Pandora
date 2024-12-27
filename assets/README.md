@@ -4,11 +4,12 @@ Assets is an abstraction to import Css, Javascript and Html dynamically on runti
 
 
 ## importHtml
-Returns a promise when Html is loaded. It accepts options from `fetch` api.
-
 ```ts 
 importHtml( url: string, options?: fetchOptions ) : Promise<Response, string>
 ```
+
+Returns a promise when Html is loaded. It accepts options from `fetch` api.
+
 
 ### Usage 
 
@@ -23,11 +24,12 @@ importHtml('https://html-mock.fly.dev/tag/table?class=table%20table-bordered')
 
 
 ## importJs
-Returns a promise when script is loaded
-
 ```ts 
 importJs( url: string, options? = { async = true } ) : Promise<Event>
 ```
+
+Returns a promise when script is loaded
+
 
 ### Usage 
 
@@ -45,11 +47,12 @@ importJs('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js')
 
 
 ## importCss
-Returns a promise when Css is loaded
-
 ```ts 
 importJs( url: string ) : Promise<Event>
 ```
+
+Returns a promise when Css is loaded
+
 
 ### Usage 
 

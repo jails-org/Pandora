@@ -16,3 +16,18 @@ export const debounce = (func, timeout = 250) => {
       timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
+
+
+export const isVisible = ( target, { root = null, rootMargin = '0px', threshold = 0 } = {}) => {
+	return new Promise((resolve, reject) => {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach( entry => {
+				if( entry.isIntersecting ) {
+					resolve(entries)
+					observer.unobserve( target)
+				}
+			})
+		}, { root, rootMargin, threshold })
+		observer.observe( target )
+	})
+}

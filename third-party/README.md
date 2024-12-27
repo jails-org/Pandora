@@ -4,11 +4,11 @@ A package that has some utilities functions to manage third-party cdn scripts li
 
 
 ## thirdPartyScript()
-Enables the developer to run third-party scripts at a convenient time, integrating those scripts into the app flow.
-
 ```ts 
 thirdPartyScript( name: string ): Promise<HTMLScriptElement>
 ```
+
+Enables the developer to run third-party scripts at a convenient time, integrating those scripts into the app flow.
 
 <br />
 
